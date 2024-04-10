@@ -13,6 +13,14 @@ class UserService {
   }
 
   async getUserById(id: number) {
+    if (isNaN(id)) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        data: {
+          message: "Invalid user id",
+        },
+      };
+    }
     const user = await prisma.user.findUnique({
       where: {
         id,
@@ -29,9 +37,15 @@ class UserService {
         },
       };
     }
+    const userWithoutPassword = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      payments: user.payments,
+    };
     return {
       status: HttpStatus.OK,
-      data: user,
+      data: userWithoutPassword,
     };
   }
 
@@ -50,14 +64,12 @@ class UserService {
         },
       };
     }
-
-    const created = prisma.user.create({
+    const created = await prisma.user.create({
       data: user,
       include: {
         payments: true,
       },
     });
-
     if (!created) {
       return {
         status: HttpStatus.INTERNAL_SERVER_ERROR,
@@ -73,6 +85,27 @@ class UserService {
   }
 
   async updateUser(id: number, data: Partial<User>) {
+    if (isNaN(id)) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        data: {
+          message: "Invalid user id",
+        },
+      };
+    }
+    const existsUser = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!existsUser) {
+      return {
+        status: HttpStatus.NOT_FOUND,
+        data: {
+          message: "User not found",
+        },
+      };
+    }
     const updated = await prisma.user.update({
       where: {
         id,
@@ -82,7 +115,6 @@ class UserService {
         payments: true,
       },
     });
-
     if (!updated) {
       return {
         status: HttpStatus.INTERNAL_SERVER_ERROR,
@@ -91,10 +123,15 @@ class UserService {
         },
       };
     }
-
+    const userWithoutPassword = {
+      id: updated.id,
+      name: updated.name,
+      email: updated.email,
+      payments: updated.payments,
+    };
     return {
       status: HttpStatus.OK,
-      data: updated,
+      data: userWithoutPassword,
     };
   }
 

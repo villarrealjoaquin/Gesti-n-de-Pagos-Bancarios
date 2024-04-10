@@ -89,7 +89,7 @@ export const useAuthStore = create<AuthType>(
               quantity = payment.amount;
             }
             const status =
-              amount === payment.amount ? "Completado" : "Pendiente";
+              quantity === payment.amount ? "Completado" : "Pendiente";
             return {
               ...payment,
               amountPaid: quantity,

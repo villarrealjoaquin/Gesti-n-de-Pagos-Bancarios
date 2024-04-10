@@ -25,7 +25,7 @@ export class PrismaRepository implements PaymentRepository {
   async createPayment(data: Payment, userId: number): Promise<Payment> {
     const currentDate = generateCurrentDate();
     const transactionNumber = Date.now().toString().slice(0, 10);
-    const status = "pendiente";
+    const status = "Pendiente";
     const newPayment = {
       ...data,
       userId,

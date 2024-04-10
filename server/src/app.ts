@@ -16,5 +16,8 @@ app.use(
 app.use(json());
 app.use(cookiesParser());
 app.use("/api", apiRouter);
+app.get("/", (_req, res) => {
+  res.send("Hello World");
+});
 
 export default app;
