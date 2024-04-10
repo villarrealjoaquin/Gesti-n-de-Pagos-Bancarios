@@ -4,7 +4,7 @@ import { useAuthStore } from "@/store/user.store";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function useVerifyToken() {
+export default function useVerifyAuthToken() {
   const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
   const setUser = useAuthStore((state) => state.setUser);
   const setIsLoading = useAuthStore((state) => state.setisLoading);

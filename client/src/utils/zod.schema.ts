@@ -18,10 +18,18 @@ export const registerSchema = z.object({
 });
 
 export const paymentSchema = z.object({
-  type: z.string().min(1, { message: "Tipo de pago inválido" }),
+  type: z.enum(["factura", "transferencia", "deposito", "tarjeta", "compra"], {
+    invalid_type_error: "Tipo de Pago inválido",
+  }),
   amount: z
     .number({ invalid_type_error: "Monto inválido" })
     .min(1, { message: "Monto inválido" }),
   description: z.string().min(1, { message: "Descripción inválida" }),
-  category: z.string().min(1, { message: "Categoría inválida" }),
+  category: z.enum([
+    "Hogar",
+    "Transporte",
+    "Alimentación",
+    "Entretenimiento",
+    "Otros",
+  ]),
 });

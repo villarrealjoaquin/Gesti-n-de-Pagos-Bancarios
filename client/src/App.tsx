@@ -2,8 +2,8 @@ import { lazy, Suspense } from "react";
 import { Route } from "react-router-dom";
 import { PrivateRoutes, PublicRoutes } from "./model/routes";
 import { RouterWithNotFound } from "./utils/RouterWithNotFound";
-import { useVerifyAuthToken } from "./hooks";
 import { AuthGuard } from "./utils";
+import useVerifyAuthToken from "./hooks/use-verify-auth-token";
 
 const Login = lazy(() => import("./pages/Login/Login"));
 const Register = lazy(() => import("./pages/Register/Register"));

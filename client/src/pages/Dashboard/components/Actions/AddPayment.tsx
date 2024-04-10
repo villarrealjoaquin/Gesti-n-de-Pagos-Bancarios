@@ -1,4 +1,4 @@
-import { AddPaymentIcon, Button, InputForm } from "@/components";
+import { AddPaymentIcon, Button, InputForm, Label } from "@/components";
 import {
   Dialog,
   DialogContent,
@@ -7,6 +7,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { categories, paymentTypes } from "@/constants";
 import api from "@/services/payment.service";
 import { useAuthStore } from "@/store/user.store";
 import { paymentSchema } from "@/utils";
@@ -15,7 +23,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 const DEFAULT_VALUES_FORM_PAYMENT = {
-  description: "pago de agua",
+  description: "",
   type: "transferencia",
   amount: 10000,
   category: "servicios",
@@ -36,7 +44,7 @@ export default function AddPayment() {
   const token = useAuthStore((state) => state.token);
   const addPaymentToUser = useAuthStore((state) => state.addPaymentToUser);
 
-  const addPayment = async (data: DataForm) => {
+  const onSubmit = async (data: DataForm) => {
     try {
       const res = await api.createPayment(data, token);
       if (res.data) {
@@ -64,7 +72,7 @@ export default function AddPayment() {
               Agrega un nuevo pago al sistema de pagos de tu cuenta.
             </DialogDescription>
           </DialogHeader>
-          <form onSubmit={handleSubmit(addPayment)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <InputForm
               label="Descripción"
               id="description"
@@ -72,13 +80,23 @@ export default function AddPayment() {
               {...register("description")}
               error={errors.description}
             />
-            <InputForm
-              label="tipo de Pago"
-              id="type"
-              type="text"
-              {...register("type")}
-              error={errors.type}
-            />
+
+            <div className="flex flex-col mb-4 gap-3 w-full">
+              <Label id="type">Tipo de Pago</Label>
+              <Select {...register("type")}>
+                <SelectTrigger className="text-black w-full">
+                  <SelectValue placeholder="Seleccionar Tipo" />
+                </SelectTrigger>
+                <SelectContent>
+                  {paymentTypes.map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
             <InputForm
               label="Monto ($)"
               type="number"
@@ -87,14 +105,24 @@ export default function AddPayment() {
               {...register("amount", { valueAsNumber: true })}
               error={errors.amount}
             />
-            <InputForm
-              label="Categoría"
-              type="text"
-              id="category"
-              {...register("category")}
-              error={errors.category}
-            />
-            <Button type="submit">Confirm</Button>
+
+            <div className="flex flex-col mb-4 gap-3 w-full">
+              <Label id="category">Categoría</Label>
+              <Select {...register("category")}>
+                <SelectTrigger className="text-black w-full">
+                  <SelectValue placeholder="Seleccionar Tipo" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((categoria) => (
+                    <SelectItem key={categoria} value={categoria}>
+                      {categoria}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <Button type="submit">Agregar</Button>
           </form>
         </DialogContent>
       </Dialog>
