@@ -88,11 +88,7 @@ export class PrismaRepository implements PaymentRepository {
   ): Promise<Partial<Payment>> {
     const formattedData = {
       ...data,
-      date: data.date
-        ? typeof data.date === "string"
-          ? data.date
-          : data.date.toString()
-        : undefined,
+      date: typeof data.date === "string" ? data.date : data.date.toString(),
     };
     const payment = await prisma.payment.update({
       where: {

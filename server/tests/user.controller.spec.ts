@@ -40,16 +40,16 @@ describe("user controller", () => {
 
   // POST
   describe("POST /users", () => {
-    // test("should create a new user", async () => {
-    //   const body = {
-    //     id: 4,
-    //     name: "Mario3",
-    //     email: "mario3@example.com",
-    //     payments: [],
-    //   };
-    //   const response = await request(app).post("/api/users").send(body);
-    //   expect(response.status).toBe(201);
-    // });
+    test("should create a new user", async () => {
+      const body = {
+        id: 4,
+        name: "Mario3",
+        email: "mario3@example.com",
+        payments: [],
+      };
+      const response = await request(app).post("/api/users").send(body);
+      expect(response.status).toBe(201);
+    });
 
     test("should return 409 if user already exists", async () => {
       const body = {

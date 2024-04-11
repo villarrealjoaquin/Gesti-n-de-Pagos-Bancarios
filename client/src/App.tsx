@@ -4,6 +4,7 @@ import { PrivateRoutes, PublicRoutes } from "./model/routes";
 import { RouterWithNotFound } from "./utils/RouterWithNotFound";
 import { AuthGuard } from "./utils";
 import useVerifyAuthToken from "./hooks/use-verify-auth-token";
+import { Loading } from "./components";
 
 const Login = lazy(() => import("./pages/Login/Login"));
 const Register = lazy(() => import("./pages/Register/Register"));
@@ -13,7 +14,7 @@ function App() {
   useVerifyAuthToken();
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <RouterWithNotFound>
           <Route path={PublicRoutes.LOGIN} element={<Login />} />
           <Route path={PublicRoutes.REGISTER} element={<Register />} />

@@ -39,7 +39,6 @@ export default function Login() {
         setToken(res.data.token);
         setIsAuthenticated(true);
         reset();
-        console.log(res);
         navigate(PrivateRoutes.DASHBOARD);
       }
     } catch (error) {

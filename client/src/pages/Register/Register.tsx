@@ -38,7 +38,6 @@ export default function Register() {
         setUser(res.data.user);
         setToken(res.data.token);
         reset();
-        console.log(res);
         navigate(PrivateRoutes.DASHBOARD);
       }
     } catch (error) {

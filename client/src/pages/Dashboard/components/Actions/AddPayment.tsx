@@ -6,27 +6,19 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { categories, paymentTypes } from "@/constants";
 import api from "@/services/payment.service";
 import { useAuthStore } from "@/store/user.store";
-import { paymentSchema } from "@/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 const DEFAULT_VALUES_FORM_PAYMENT = {
   description: "",
-  type: "transferencia",
+  type: "Transferencia",
   amount: 10000,
-  category: "servicios",
+  category: "",
 };
 
 type DataForm = typeof DEFAULT_VALUES_FORM_PAYMENT;
@@ -38,7 +30,6 @@ export default function AddPayment() {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(paymentSchema),
     defaultValues: DEFAULT_VALUES_FORM_PAYMENT,
   });
   const token = useAuthStore((state) => state.token);
@@ -82,19 +73,24 @@ export default function AddPayment() {
             />
 
             <div className="flex flex-col mb-4 gap-3 w-full">
-              <Label id="type">Tipo de Pago</Label>
-              <Select {...register("type")}>
-                <SelectTrigger className="text-black w-full">
-                  <SelectValue placeholder="Seleccionar Tipo" />
-                </SelectTrigger>
-                <SelectContent>
-                  {paymentTypes.map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {type}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Label htmlFor="type" className="text-black mb-1">
+                Tipo de Pago
+              </Label>
+              <select
+                id="type"
+                name="type"
+                className="text-black w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+                defaultValue={"Transferencia"}
+              >
+                <option value="" disabled>
+                  Seleccionar Tipo
+                </option>
+                {paymentTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <InputForm
@@ -107,22 +103,30 @@ export default function AddPayment() {
             />
 
             <div className="flex flex-col mb-4 gap-3 w-full">
-              <Label id="category">Categoría</Label>
-              <Select {...register("category")}>
-                <SelectTrigger className="text-black w-full">
-                  <SelectValue placeholder="Seleccionar Tipo" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((categoria) => (
-                    <SelectItem key={categoria} value={categoria}>
-                      {categoria}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Label htmlFor="category" className="text-black mb-1">
+                Categoría
+              </Label>
+              <select
+                id="category"
+                name="category"
+                className="text-black w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+                defaultValue={"Entretenimiento"}
+              >
+                <option value="" disabled>
+                  Seleccionar Categoría
+                </option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
             </div>
-
-            <Button type="submit">Agregar</Button>
+            <DialogClose>
+              <Button type="submit">
+                Agregar
+              </Button>
+            </DialogClose>
           </form>
         </DialogContent>
       </Dialog>

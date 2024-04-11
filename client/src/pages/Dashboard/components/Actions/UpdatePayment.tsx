@@ -42,7 +42,6 @@ export default function UpdatePayment({ payment }: { payment: Payment }) {
       }
     } catch (error) {
       toast.error("Error al actualizar el pago");
-      console.log(error);
     }
   };
 

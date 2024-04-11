@@ -16,7 +16,7 @@ function Dashboard() {
     filterState, 
     payments,
     updateFilterState, 
-    clearFilters, 
+    clearFilters 
   } = useFilterPayments(user?.payments || []);
 
   if (!user) return null;
@@ -42,7 +42,7 @@ function Dashboard() {
               <PaymentTable payments={payments} />
             </div>
           </section>
-          <section className="flex justify-between px-10">
+          <section className="flex justify-between px-10 my-9">
             <Button
               className="w-[180px] px-3"
               onClick={() => exportCSV(user.payments)}

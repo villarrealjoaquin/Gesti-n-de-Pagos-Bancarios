@@ -15,7 +15,7 @@ export default function useFilterPayments(initialPayments: Payment[]) {
   const [filterState, setFilterState] = useState<FiltersValuesState>(
     DEFAULT_FILTER_STATE
   );
-  
+
   const updateFilterState = (newState: Partial<FiltersValuesState>) => {
     setFilterState((prev) => ({ ...prev, ...newState }));
   };
@@ -34,10 +34,9 @@ export default function useFilterPayments(initialPayments: Payment[]) {
           payment.description.toLowerCase().includes(query.toLowerCase()))
       );
     });
-
     return sort === orderBy
-      ? filteredPayments.sort((a, b) => a.amount - b.amount)
-      : filteredPayments.sort((a, b) => a.amount + b.amount);
+      ? [...filteredPayments].sort((a, b) => a.amount - b.amount)
+      : [...filteredPayments].sort((a, b) => a.amount + b.amount);
   };
 
   return {
