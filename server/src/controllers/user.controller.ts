@@ -54,8 +54,6 @@ class UserController {
       const response = await userService.updateUser(userId, body);
       return res.status(response.status).json(response.data);
     } catch (error) {
-      console.log(error);
-      
       return res
         .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ message: "Error creating user" });

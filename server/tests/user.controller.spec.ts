@@ -1,11 +1,7 @@
 import request from "supertest";
-const { mock } = require("supertest");
-
 import app from "../src/app";
 import { describe, test, expect, afterAll } from "vitest";
 import { userMock, userUpdateMock } from "../src/mock/users";
-
-console.log(mock);
 
 describe("user controller", () => {
   // GET

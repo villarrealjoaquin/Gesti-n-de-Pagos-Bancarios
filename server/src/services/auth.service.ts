@@ -95,24 +95,6 @@ class authService {
     };
   }
 
-  // async isValidToken(token: string) {
-  //   const user = this.validateToken(token, process.env.JWT_SECRET);
-  //   if (!user) {
-  //     return {
-  //       status: HttpStatus.UNAUTHORIZED,
-  //       data: { message: "Unauthorized" },
-  //     };
-  //   }
-  //   return {
-  //     status: HttpStatus.OK,
-  //     data: {
-  //       id: user.id,
-  //       name: user.name,
-  //       email: user.email,
-  //     },
-  //   };
-  // }
-
   async validateToken(token: string, secret: string, res: Response) {
     jwt.verify(token, secret, async (err: VerifyErrors | null, user: any) => {
       if (err) {

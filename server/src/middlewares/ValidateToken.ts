@@ -1,6 +1,14 @@
 import type { NextFunction, Request, Response } from "express";
-import jwt, { type VerifyErrors } from "jsonwebtoken";
+import jwt, { type JwtPayload, type VerifyErrors } from "jsonwebtoken";
 import { HttpStatus } from "../utils/http-status-enum";
+
+type JwtUser = JwtPayload | undefined | string;
+
+type EncodedUser = {
+  id: number;
+  name: string;
+  email: string;
+};
 
 export const validateToken = (
   req: Request,
@@ -17,13 +25,13 @@ export const validateToken = (
     jwt.verify(
       challenge,
       process.env.JWT_SECRET,
-      (error: VerifyErrors | null, user: any) => {
+      (error: VerifyErrors | null, user: JwtUser) => {
         if (error) {
           return res.status(HttpStatus.UNAUTHORIZED).json({
             error: "Unauthorized",
           });
         }
-        req.user = user;
+        req.user = user as EncodedUser;
         next();
       }
     );
