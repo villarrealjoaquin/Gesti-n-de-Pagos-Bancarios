@@ -22,7 +22,7 @@ export default function PaymentTable({
   payments: PaymentType[];
 }) {
   return (
-    <div style={{ maxHeight: "400px", overflowY: "auto" }}> {/* Ajusta maxHeight según tus necesidades */}
+    <div className="h-[400px] overflow-auto">
       <Table>
         <TableCaption>A list of your recent payments.</TableCaption>
         <TableHeader>

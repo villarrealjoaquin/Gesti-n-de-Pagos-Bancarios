@@ -1,6 +1,7 @@
 import { Button, InputForm } from "@/components";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -90,7 +91,9 @@ export default function UpdatePayment({ payment }: { payment: Payment }) {
               {...register("category")}
               error={errors.amount}
             />
-            <Button type="submit">Editar</Button>
+            <DialogClose asChild>
+              <Button type="submit">Editar</Button>
+            </DialogClose>
           </form>
         </DialogContent>
       </Dialog>

@@ -122,7 +122,7 @@ export default function AddPayment() {
                 ))}
               </select>
             </div>
-            <DialogClose>
+            <DialogClose asChild>
               <Button type="submit">
                 Agregar
               </Button>
