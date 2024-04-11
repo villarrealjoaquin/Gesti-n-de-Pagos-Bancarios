@@ -107,6 +107,8 @@ class PaymentsController {
       const update = await paymentService.updateItem(Number(id), userId, body);
       return res.status(HttpStatus.OK).json(update);
     } catch (error) {
+      console.log(error);
+      
       if (error instanceof Error) {
         return res
           .status(HttpStatus.INTERNAL_SERVER_ERROR)

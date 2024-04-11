@@ -15,9 +15,6 @@ class UserController {
       }));
       return res.status(HttpStatus.OK).json(dataWithoutPassword);
     } catch (error) {
-      console.log(error);
-      console.log("Error getting users testing");
-      
       return res
         .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ message: "Error getting users" });

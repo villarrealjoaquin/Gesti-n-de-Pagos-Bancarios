@@ -54,7 +54,7 @@ export default function Payment({ payment }: { payment: Payment }) {
                 onChange={(e) => setAmount(Number(e.target.value))}
                 defaultValue={payment.amount}
               />
-              <Button type="submit">Editar</Button>
+              <Button type="submit">Pagar</Button>
             </form>
           </DialogContent>
         </Dialog>

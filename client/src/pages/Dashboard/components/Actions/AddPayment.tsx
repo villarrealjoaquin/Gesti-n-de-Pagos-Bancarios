@@ -16,7 +16,7 @@ import { toast } from "sonner";
 
 const DEFAULT_VALUES_FORM_PAYMENT = {
   description: "",
-  type: "Transferencia",
+  type: "transferencia",
   amount: 10000,
   category: "",
 };
@@ -78,9 +78,9 @@ export default function AddPayment() {
               </Label>
               <select
                 id="type"
-                name="type"
                 className="text-black w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
                 defaultValue={"Transferencia"}
+                {...register("type")}
               >
                 <option value="" disabled>
                   Seleccionar Tipo
@@ -108,9 +108,9 @@ export default function AddPayment() {
               </Label>
               <select
                 id="category"
-                name="category"
                 className="text-black w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
-                defaultValue={"Entretenimiento"}
+                defaultValue={"Otros"}
+                {...register("category")}
               >
                 <option value="" disabled>
                   Seleccionar Categoría

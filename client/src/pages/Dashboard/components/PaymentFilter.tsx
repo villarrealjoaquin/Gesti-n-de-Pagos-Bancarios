@@ -26,7 +26,7 @@ export default function PaymentFilter({
           <SelectValue placeholder="Seleccionar Tipo" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="Factura">Factura</SelectItem>
+          <SelectItem value="factura">Factura</SelectItem>
           <SelectItem value="transferencia">transferencia</SelectItem>
           <SelectItem value="Compra">Compra</SelectItem>
           <SelectItem value="tarjeta">Tarjeta de Crédito</SelectItem>
