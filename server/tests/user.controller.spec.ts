@@ -97,4 +97,13 @@ describe("user controller", () => {
       expect(response.body).toEqual({ message: "User not found" });
     });
   });
+
+  // DELETE
+  describe("DELETE /users/:id", () => {
+    test("should delete a user by id", async () => {
+      const userId = 2;
+      const response = await request(app).delete(`/api/users/${userId}`).expect(200);
+      expect(response.body).toEqual({ message: "User deleted successfully" });
+    });
+  });
 });
