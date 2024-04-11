@@ -49,7 +49,7 @@ export default function Login() {
   return (
     <>
       <main>
-        <div className="flex justify-center items-center h-screen bg-gray-200">
+        <div className="flex flex-col justify-center items-center h-screen bg-gray-200">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="bg-white shadow-md rounded-lg p-8 max-w-md w-full"
@@ -86,6 +86,14 @@ export default function Login() {
               </Link>
             </div>
           </form>
+          <p className="text-center text-xs w-1/3 text-gray-700 mb-4 mt-6">
+            Dado que el backend está desplegado en Render, es importante tener
+            en cuenta la advertencia que indica: "Su instancia gratuita dejará
+            de funcionar debido a la inactividad, lo que puede retrasar las
+            solicitudes 50 segundos o más". Si experimentas problemas al iniciar
+            sesion, es posible que solo necesites esperar mientras la instancia
+            se reactiva.
+          </p>
         </div>
       </main>
     </>
