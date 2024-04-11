@@ -25,6 +25,8 @@ class AuthController {
         token: response.token,
       });
     } catch (error) {
+      console.log(error);
+      
       return res
         .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ message: "Error logging in" });
