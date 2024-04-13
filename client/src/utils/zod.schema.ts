@@ -23,7 +23,7 @@ export const paymentSchema = z.object({
   }),
   amount: z
     .number({ invalid_type_error: "Monto inválido" })
-    .min(1, { message: "Monto inválido" }),
+    .min(1000, { message: "Monto inválido min 1000" }),
   description: z.string().min(1, { message: "Descripción inválida" }),
   category: z.enum([
     "Hogar",

@@ -5,19 +5,20 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-  DialogClose,
+  DialogTrigger
 } from "@/components/ui/dialog";
 import { categories, paymentTypes } from "@/constants";
 import api from "@/services/payment.service";
 import { useAuthStore } from "@/store/user.store";
+import { paymentSchema } from "@/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 const DEFAULT_VALUES_FORM_PAYMENT = {
   description: "",
   type: "transferencia",
-  amount: 10000,
+  amount: 0,
   category: "",
 };
 
@@ -30,6 +31,7 @@ export default function AddPayment() {
     reset,
     formState: { errors },
   } = useForm({
+    resolver: zodResolver(paymentSchema),
     defaultValues: DEFAULT_VALUES_FORM_PAYMENT,
   });
   const token = useAuthStore((state) => state.token);
@@ -122,11 +124,8 @@ export default function AddPayment() {
                 ))}
               </select>
             </div>
-            <DialogClose asChild>
-              <Button type="submit">
-                Agregar
-              </Button>
-            </DialogClose>
+            
+            <Button type="submit">Agregar</Button>
           </form>
         </DialogContent>
       </Dialog>
